@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Diwali Cracker Bazaar</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+  /* ================= THEME ================= */
+  :root{
+    --gold:#ffc233;
+    --gold-soft:rgba(255,194,51,.30);
+    --ink:#08060f;
+  }
+  html,body{min-height:100%;}
+  body{
+    background:
+      radial-gradient(1200px 620px at 10% -12%, rgba(255,140,0,.20), transparent 60%),
+      radial-gradient(1000px 520px at 92% -4%, rgba(247,37,133,.18), transparent 60%),
+      radial-gradient(900px 620px at 50% 112%, rgba(76,201,240,.13), transparent 62%),
+      var(--ink);
+    color:#f7efe4;
+    font-family:"Segoe UI", system-ui, -apple-system, sans-serif;
+    overflow-x:hidden;
+  }
+  #fx{position:fixed; inset:0; width:100%; height:100%; pointer-events:none; z-index:3000;}
+
+  /* ================= TOP BAR ================= */
+  .topbar{
+    display:flex; align-items:center; justify-content:space-between; gap:1rem;
+    padding:.85rem 1.25rem;
+    background:linear-gradient(180deg, rgba(255,183,3,.12), rgba(0,0,0,0));
+    border-bottom:1px solid rgba(255,183,3,.18);
+    backdrop-filter:blur(8px);
+    position:relative; z-index:10;
+  }
+  .brand{font-weight:900; letter-spacing:.4px;}
+  .brand .dot{color:var(--gold);}
+  .wallet-pill{
+    background:linear-gradient(180deg,#ffd166,#ff9f1c);
+    color:#2b1a00; font-weight:800; border-radius:999px;
+    padding:.35rem .9rem; font-size:.9rem;
+    box-shadow:0 0 22px rgba(255,159,28,.45);
+  }
+
+  /* ================= STRING LIGHTS ================= */
+  .lights{
+    height:16px; margin:0 auto; max-width:1100px;
+    background-image:
+      radial-gradient(circle, #ffd166 2.5px, transparent 3px),
+      radial-gradient(circle, #ff7b7b 2.5px, transparent 3px);
+    background-size:34px 16px, 34px 16px;
+    background-position:0 0, 17px 0;
+    animation:twinkle 2.4s ease-in-out infinite alternate;
+  }
+  @keyframes twinkle{
+    from{opacity:.30; filter:drop-shadow(0 0 0 transparent);}
+    to  {opacity:1;   filter:drop-shadow(0 0 7px #ffd166);}
+  }
+
+  /* ================= GLASS CARD ================= */
+  .glass-card{
+    background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.02));
+    border:1px solid rgba(255,194,51,.22);
+    border-radius:20px;
+    box-shadow:0 20px 60px rgba(0,0,0,.65), inset 0 0 60px rgba(255,150,0,.05);
+    backdrop-filter:blur(9px);
+  }
+
+  /* ================= LOGIN ================= */
+  .diya{
+    font-size:3.4rem; display:inline-block;
+    animation:flicker 1.9s ease-in-out infinite;
+    filter:drop-shadow(0 0 20px rgba(255,160,0,.9));
+  }
+  @keyframes flicker{
+    0%,100%{transform:scale(1) rotate(-3deg);}
+    50%    {transform:scale(1.09) rotate(3deg);}
+  }
+  .festive-title{
+    font-weight:900; letter-spacing:.5px;
+    background:linear-gradient(90deg,#ffd166,#ff7b00,#ff3b8b,#ffd166);
+    background-size:220% auto;
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+    animation:shine 6s linear infinite;
+  }
+  @keyframes shine{to{background-position:220% center;}}
+
+  .btn-festive{
+    background:linear-gradient(180deg,#ffd166,#ff8c00);
+    border:none; color:#2b1a00; font-weight:900; letter-spacing:.3px;
+    box-shadow:0 10px 26px rgba(255,140,0,.35);
+    transition:transform .2s, box-shadow .2s;
+  }
+  .btn-festive:hover:not(:disabled){
+    transform:translateY(-2px);
+    box-shadow:0 16px 34px rgba(255,140,0,.55);
+    color:#2b1a00;
+  }
+  .btn-ghost{
+    background:rgba(255,194,51,.10);
+    border:1px solid rgba(255,194,51,.45);
+    color:#ffd166; font-weight:800;
+    transition:.2s;
+  }
+  .btn-ghost:hover{background:rgba(255,194,51,.25); color:#fff; transform:translateY(-2px);}
+
+  /* ================= MARKET / STALLS ================= */
+  .market-title{
+    font-weight:900;
+    background:linear-gradient(90deg,#ffd166,#ff9f1c,#ffd166);
+    background-size:200% auto;
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+    animation:shine 5s linear infinite;
+  }
+  .stall-col{animation:rise .5s both;}
+  @keyframes rise{
+    from{opacity:0; transform:translateY(20px) scale(.97);}
+    to  {opacity:1; transform:none;}
+  }
+  .stall{
+    position:relative; height:100%;
+    background:linear-gradient(180deg,#2b1c14,#1a120e 70%);
+    border:1px solid rgba(255,183,3,.28);
+    border-radius:16px;
+    overflow:hidden;
+    box-shadow:0 14px 36px rgba(0,0,0,.55), inset 0 0 50px rgba(255,140,0,.05);
+    transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+    display:flex; flex-direction:column;
+  }
+  .stall:hover{
+    transform:translateY(-6px);
+    border-color:rgba(255,183,3,.65);
+    box-shadow:0 22px 50px rgba(255,140,0,.22), inset 0 0 60px rgba(255,140,0,.09);
+  }
+  .stall-awning{
+    height:22px; position:relative; flex:0 0 auto;
+    background:repeating-linear-gradient(90deg, var(--c1) 0 18px, var(--c2) 18px 36px);
+    box-shadow:0 3px 12px rgba(0,0,0,.55);
+  }
+  .stall-awning::after{
+    content:''; position:absolute; left:0; right:0; bottom:-9px; height:10px;
+    background:
+      radial-gradient(circle at 9px 0, var(--c1) 8px, transparent 9px) 0 0/18px 10px repeat-x,
+      radial-gradient(circle at 9px 0, var(--c2) 8px, transparent 9px) 9px 0/18px 10px repeat-x;
+  }
+  .stall-body{
+    padding:1.15rem 1rem 1rem; display:flex; flex-direction:column;
+    align-items:center; text-align:center; flex:1 1 auto;
+  }
+  .stall-sign{
+    font-size:.72rem; text-transform:uppercase; letter-spacing:1.4px;
+    font-weight:800; color:#ffe1a3;
+    background:rgba(255,183,3,.10);
+    border:1px dashed rgba(255,183,3,.35);
+    border-radius:8px; padding:.2rem .55rem; margin-bottom:.6rem;
+  }
+  .stall-emoji{
+    font-size:2.9rem; line-height:1;
+    filter:drop-shadow(0 6px 16px rgba(255,160,0,.45));
+    transition:transform .3s ease;
+  }
+  .stall:hover .stall-emoji{transform:scale(1.12) rotate(-4deg);}
+  .stall-name{font-size:1.02rem; font-weight:800; margin:.55rem 0 .4rem;}
+  .price-tag{
+    display:inline-flex; align-items:baseline; gap:.25rem;
+    background:linear-gradient(180deg,#ffd166,#ff9f1c);
+    color:#2b1a00; font-weight:900; font-size:1rem;
+    padding:.15rem .7rem; border-radius:999px;
+    box-shadow:0 6px 18px rgba(255,159,28,.35);
+    margin-bottom:.85rem;
+  }
+  .price-tag span{font-size:.68rem; font-weight:700; opacity:.75;}
+
+  .qty-row{display:flex; align-items:center; gap:.75rem;}
+  .qty-btn{
+    width:42px; height:42px; border-radius:12px; line-height:1;
+    border:1px solid rgba(255,194,51,.5);
+    background:rgba(255,194,51,.08);
+    color:#ffd166; font-size:1.35rem; font-weight:900;
+    transition:.15s;
+  }
+  .qty-btn:hover:not(:disabled){background:rgba(255,194,51,.28); transform:translateY(-2px);}
+  .qty-btn:disabled{opacity:.25; cursor:not-allowed;}
+  .qty-btn.plus{
+    background:linear-gradient(180deg,#ffb703,#ff8c00);
+    color:#2b1a00; border-color:transparent;
+    box-shadow:0 6px 16px rgba(255,140,0,.4);
+  }
+  .qty-num{font-size:1.5rem; font-weight:900; min-width:2rem;}
+  .line-total{font-size:.8rem; color:#b9ae9d; margin-top:.7rem;}
+
+  /* ================= BURN LAYOUT ================= */
+  .burn-layout{display:flex; gap:1rem; align-items:stretch; min-height:calc(100vh - 160px);}
+  .burn-rail{
+    flex:0 0 320px; width:320px;
+    display:flex; flex-direction:column; gap:.75rem;
+    max-height:calc(100vh - 160px);
+    overflow-y:auto; padding-right:.35rem;
+  }
+  .burn-rail::-webkit-scrollbar{width:6px;}
+  .burn-rail::-webkit-scrollbar-thumb{background:rgba(255,194,51,.35); border-radius:99px;}
+  .rail-head{padding:.85rem 1rem;}
+
+  .rail-card{
+    display:flex; align-items:center; gap:.7rem;
+    padding:.7rem .8rem; border-radius:14px;
+    background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.02));
+    border:1px solid rgba(255,194,51,.20);
+    transition:.28s ease;
+    opacity:.55;
+  }
+  .rail-card.active{opacity:1; border-color:#ff8c00; box-shadow:0 0 24px rgba(255,140,0,.55); transform:scale(1.02);}
+  .rail-card.burnt{opacity:.75; border-color:rgba(74,222,128,.55); box-shadow:0 0 20px rgba(74,222,128,.22);}
+  .rail-emoji{font-size:1.65rem; line-height:1;}
+  .rail-info{flex:1 1 auto; min-width:0;}
+  .rail-name{font-weight:800; font-size:.93rem;}
+  .rail-meta{font-size:.74rem; color:#b9ae9d;}
+  .rail-state{
+    font-size:.66rem; font-weight:900; text-transform:uppercase;
+    letter-spacing:.8px; color:#8d8578;
+  }
+  .rail-card.active .rail-state{color:#ffb703;}
+  .rail-card.burnt .rail-state{color:#7ee787;}
+
+  /* ================= STAGE ================= */
+  .burn-stage{
+    flex:1 1 auto; position:relative;
+    border-radius:22px;
+    border:1px solid rgba(255,194,51,.18);
+    overflow:hidden;
+    min-height:480px;
+    cursor:pointer;
+    background:
+      radial-gradient(ellipse at 50% 118%, rgba(255,140,0,.22), transparent 62%),
+      radial-gradient(circle at 80% 14%, rgba(255,255,255,.13), transparent 11%),
+      linear-gradient(180deg,#04050e 0%, #0a1030 55%, #101a3d 100%);
+  }
+  .burn-stage::before{
+    content:''; position:absolute; top:7%; right:8%;
+    width:64px; height:64px; border-radius:50%;
+    background:radial-gradient(circle at 35% 35%, #fffbe8, #ffe9a8 60%, #ffd166);
+    box-shadow:0 0 46px rgba(255,225,150,.55);
+    opacity:.85; pointer-events:none;
+  }
+  .burn-stage::after{
+    content:''; position:absolute; left:0; right:0; bottom:0; height:26%;
+    background:linear-gradient(180deg, transparent, rgba(255,140,0,.16));
+    pointer-events:none;
+  }
+  .stage-top{position:absolute; top:1rem; left:1.15rem; right:1.15rem; z-index:4;}
+  .stage-hint{
+    position:absolute; inset:0; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; text-align:center;
+    pointer-events:none; opacity:.45; z-index:2;
+  }
+  .stage-hint .hint-emoji{font-size:2.8rem; animation:flicker 2.4s ease-in-out infinite;}
+
+  /* -------- the one-at-a-time live cracker card -------- */
+  .card-layer{
+    position:absolute; inset:0; z-index:6;
+    display:flex; align-items:center; justify-content:center;
+    pointer-events:none;
+  }
+  .cracker-card{
+    pointer-events:auto; cursor:pointer;
+    width:min(320px, 80%);
+    padding:1.5rem 1.2rem 1.3rem;
+    border-radius:26px;
+    text-align:center;
+    background:linear-gradient(180deg, rgba(255,194,51,.16), rgba(255,120,0,.05));
+    border:1px solid rgba(255,194,51,.55);
+    box-shadow:0 0 60px rgba(255,140,0,.35), inset 0 0 40px rgba(255,140,0,.10);
+    display:flex; flex-direction:column; align-items:center; gap:.3rem;
+    animation:cardIn .5s cubic-bezier(.2,.9,.3,1.5) both;
+    transition:transform .18s ease;
+  }
+  .cracker-card:hover{transform:scale(1.035);}
+  @keyframes cardIn{
+    from{opacity:0; transform:scale(.65) translateY(40px);}
+    to  {opacity:1; transform:none;}
+  }
+  .cracker-card.burning{
+    animation:cardBurn .45s ease forwards;
+    pointer-events:none;
+  }
+  @keyframes cardBurn{
+    to{opacity:0; transform:scale(1.4) rotate(4deg); filter:blur(7px);}
+  }
+  .card-flame{font-size:1.5rem; animation:flicker 1.2s ease-in-out infinite;}
+  .card-emoji{font-size:3.4rem; line-height:1; filter:drop-shadow(0 8px 22px rgba(255,160,0,.6));}
+  .card-name{font-size:1.12rem; font-weight:900; margin-top:.15rem;}
+  .card-qty{font-size:.86rem; color:#ffd166; font-weight:800;}
+  .card-tap{
+    margin-top:.7rem; padding:.42rem 1.15rem; border-radius:999px;
+    font-size:.78rem; font-weight:900; letter-spacing:1.2px;
+    background:linear-gradient(180deg,#ffd166,#ff8c00);
+    color:#2b1a00;
+    box-shadow:0 0 24px rgba(255,159,28,.6);
+    animation:pulseTap 1.25s ease-in-out infinite;
+  }
+  @keyframes pulseTap{
+    0%,100%{transform:scale(1); box-shadow:0 0 20px rgba(255,159,28,.5);}
+    50%    {transform:scale(1.07); box-shadow:0 0 38px rgba(255,159,28,.95);}
+  }
+
+  /* ================= PROGRESS ================= */
+  .progress{background:rgba(255,255,255,.09); border-radius:99px;}
+  #burnProgress{
+    background:linear-gradient(90deg,#ffb703,#ff5f5f);
+    border-radius:99px;
+    box-shadow:0 0 14px rgba(255,140,0,.7);
+    transition:width .5s ease;
+  }
+
+  /* ================= FINALE ================= */
+  #summaryList .list-group-item{
+    background:transparent; color:#f7efe4;
+    border-color:rgba(255,194,51,.16);
+  }
+  .sarcasm{
+    max-width:640px; margin:1rem auto 0;
+    font-size:1.02rem; line-height:1.65; color:#d8cfc2;
+  }
+  .sarcasm strong{color:#ffd166;}
+  .cert-wrap{
+    max-width:520px; margin:1.5rem auto;
+    border-radius:16px; overflow:hidden;
+    border:1px solid rgba(255,194,51,.35);
+    box-shadow:0 20px 60px rgba(0,0,0,.7);
+  }
+  #certCanvas{display:block; width:100%; height:auto;}
+
+  /* ================= RESPONSIVE ================= */
+  @media (max-width:860px){
+    .burn-layout{flex-direction:column; min-height:0;}
+    .burn-rail{flex:0 0 auto; width:100%; max-height:none; overflow:visible;}
+    #burnList{flex-direction:row !important; overflow-x:auto; padding-bottom:.5rem;}
+    .rail-card{min-width:230px;}
+    .burn-stage{min-height:56vh;}
+    .burn-stage::before{width:46px; height:46px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- Fireworks layer (sits above everything, clicks pass through) -->
+<canvas id="fx"></canvas>
+
+<nav class="topbar">
+  <span class="brand">🪔 Diwali Cracker Bazaar <span class="dot">·</span> <small class="fw-normal opacity-75">Market Street</small></span>
+  <span id="wallet" class="wallet-pill d-none"></span>
+</nav>
+
+<main class="container-fluid py-3 px-3 px-lg-4">
+
+  <!-- 1. LOGIN -->
+  <section id="loginView" class="row justify-content-center pt-4">
+    <div class="col-12 col-md-7 col-lg-5 col-xl-4">
+      <div class="glass-card p-4 p-md-5 text-center">
+        <div class="diya">🪔</div>
+        <h1 class="festive-title h2 mt-2 mb-2">Diwali Cracker Bazaar</h1>
+        <p class="text-body-secondary mb-4">
+          Get <strong class="text-warning">₹1000</strong> of imaginary money.
+          Burn it all. Pay nothing. (Allegedly.)
+        </p>
+        <div class="text-start mb-3">
+          <label for="nameInput" class="form-label fw-semibold">Your name</label>
+          <input id="nameInput" type="text" class="form-control form-control-lg"
+                 maxlength="30" placeholder="e.g. Abhishek" autocomplete="off">
+          <div id="nameError" class="text-danger small mt-1 d-none">Please enter your name.</div>
+        </div>
+        <button id="loginBtn" class="btn btn-festive btn-lg w-100">Enter the Bazaar 🎇</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. SHOPS / MARKET STREET -->
+  <section id="shopView" class="d-none">
+    <div class="lights mb-3"></div>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-end gap-2 mb-3">
+      <div>
+        <h2 class="market-title h3 mb-1">🏮 Market Street</h2>
+        <p class="text-body-secondary mb-0">
+          Hello, <span id="userName" class="text-warning fw-bold"></span>!
+          Buy whatever you want. No rules. Abhishek trusts you.
+        </p>
+      </div>
+      <div class="text-end small">
+        <div>Spent: <strong id="spent" class="text-warning">₹0</strong></div>
+        <div>Balance: <strong id="balance" class="text-success">₹1000</strong></div>
+      </div>
+    </div>
+
+    <div id="shopGrid" class="row g-3"></div>
+
+    <div class="glass-card mt-4 p-3 p-md-4 d-flex flex-wrap justify-content-between align-items-center gap-3">
+      <div>
+        <div id="shopHint" class="small text-body-secondary">
+          Pick anything you like. There is no minimum. There is no shame either.
+        </div>
+      </div>
+      <button id="checkoutBtn" class="btn btn-festive btn-lg" disabled>
+        Pay &amp; go burn them 🔥
+      </button>
+    </div>
+  </section>
+
+  <!-- 3. BURN -->
+  <section id="burnView" class="d-none">
+    <div class="burn-layout">
+
+      <!-- side rail: your crackers, in order -->
+      <aside class="burn-rail">
+        <div class="rail-head glass-card">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <span class="fw-bold small text-warning">🎇 Your crackers</span>
+            <span id="burnCount" class="badge text-bg-warning">0 / 0</span>
+          </div>
+          <div class="progress" style="height:10px;" role="progressbar" aria-label="Crackers burnt">
+            <div id="burnProgress" class="progress-bar" style="width:0%"></div>
+          </div>
+          <div class="small text-body-secondary mt-2">One card at a time. Just tap it.</div>
+        </div>
+
+        <div id="burnList" class="d-flex flex-column gap-2"></div>
+      </aside>
+
+      <!-- open sky — full space for the fireworks -->
+      <div class="burn-stage" id="burnStage">
+        <div class="stage-top">
+          <h2 class="h5 mb-0">Time to burn, <span id="userName2" class="text-warning"></span>!</h2>
+        </div>
+
+        <div class="stage-hint" id="stageHint">
+          <div class="hint-emoji">🎆</div>
+          <p class="mb-0">Tap the card to light it up.</p>
+        </div>
+
+        <div class="card-layer" id="cardLayer"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 4. FINALE -->
+  <section id="finaleView" class="d-none">
+    <div class="glass-card text-center p-4 p-md-5">
+      <h2 class="festive-title display-6 mb-2">🎇 The Night Is Over, <span id="userName3"></span> 🎇</h2>
+      <p class="text-body-secondary mb-4">You burnt everything. Here is the damage.</p>
+
+      <ul id="summaryList" class="list-group list-group-flush text-start mx-auto mb-3 col-12 col-md-7"></ul>
+
+      <p class="sarcasm">
+        Abhishek stood in the cold, guarding five stalls, believing in you.
+        He handed you <strong>₹1000</strong> of imaginary money and you burnt it in
+        roughly thirty seconds. He is not crying. He is just sitting near the WiFi router,
+        waiting for a payment notification that will <strong>never</strong> come. 😔
+      </p>
+
+      <p class="sarcasm">
+        Can't pay? Fine. We get it. But at least <strong>make Abhishek happy</strong> —
+        download the certificate below and share it on the <strong>WhatsApp chat you got this
+        link from</strong>. Let the whole group know what you did. Let the shame be the payment. 🪔
+      </p>
+
+      <div class="cert-wrap">
+        <canvas id="certCanvas"></canvas>
+      </div>
+
+      <div class="d-flex gap-2 justify-content-center flex-wrap">
+        <button id="downloadBtn" class="btn btn-festive btn-lg">⬇ Download Certificate</button>
+        <button id="waBtn" class="btn btn-ghost btn-lg">💬 Share on WhatsApp</button>
+      </div>
+
+      <div class="mt-4">
+        <button id="againBtn" class="btn btn-outline-light">Play again 🪔</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  // ---------- DATA ----------
+  const BUDGET = 1000;
+  const SHOPS = [
+    { id:'sparkler', shop:'Lakshmi Sparkle Mart',   name:'Sparklers (pack)', emoji:'✨', price:20,  a1:'#ff8c42', a2:'#ffd166' },
+    { id:'anar',     shop:'Rajan Fireworks',        name:'Flowerpot (Anar)', emoji:'🌋', price:60,  a1:'#e63946', a2:'#ffb703' },
+    { id:'chakri',   shop:'Sivakasi Crackers Hub',  name:'Ground Chakri',    emoji:'🌀', price:30,  a1:'#06d6a0', a2:'#118ab2' },
+    { id:'rocket',   shop:'Diwali Dhamaka Store',   name:'Rocket',           emoji:'🚀', price:80,  a1:'#f72585', a2:'#7209b7' },
+    { id:'skyshot',  shop:'Royal Aerial Works',     name:'Sky Shot',         emoji:'🎆', price:150, a1:'#4361ee', a2:'#4cc9f0' }
+  ];
+  const MAX_VISUAL = 15; // cap on bursts per cracker type so the browser stays smooth
+
+  let userName = '';
+  let cart = {};
+
+  // burn-show state
+  let queue = [];        // [{ id, qty }]
+  let queueIndex = 0;
+  let currentItem = null;
+  let currentQty = 0;
+  let locked = false;
+
+  const $ = (id) => document.getElementById(id);
+  const show = (id) => {
+    ['loginView','shopView','burnView','finaleView'].forEach(v => $(v).classList.add('d-none'));
+    $(id).classList.remove('d-none');
+  };
+  const spentTotal = () => SHOPS.reduce((s, c) => s + (cart[c.id] || 0) * c.price, 0);
+  const itemCount  = () => SHOPS.reduce((s, c) => s + (cart[c.id] || 0), 0);
+
+  // ---------- LOGIN ----------
+  function login(){
+    const name = $('nameInput').value.trim();
+    if (!name){ $('nameError').classList.remove('d-none'); return; }
+    userName = name;
+    ['userName','userName2','userName3'].forEach(id => $(id).textContent = userName);
+    SHOPS.forEach(c => { cart[c.id] = 0; });
+    $('wallet').classList.remove('d-none');
+    renderShops();
+    updateTotals();
+    show('shopView');
+  }
+  $('loginBtn').addEventListener('click', login);
+  $('nameInput').addEventListener('keydown', e => { if (e.key === 'Enter') login(); });
+
+  // ---------- SHOPS (market stalls) ----------
+  function renderShops(){
+    $('shopGrid').innerHTML = SHOPS.map((c, i) => `
+      <div class="col-12 col-md-6 col-lg-4 stall-col" style="animation-delay:${i * 70}ms">
+        <div class="stall">
+          <div class="stall-awning" style="--c1:${c.a1}; --c2:${c.a2};"></div>
+          <div class="stall-body">
+            <div class="stall-sign">${c.shop}</div>
+            <div class="stall-emoji">${c.emoji}</div>
+            <h3 class="stall-name">${c.name}</h3>
+            <div class="price-tag">₹${c.price} <span>each</span></div>
+
+            <div class="qty-row">
+              <button class="qty-btn" data-act="minus" data-id="${c.id}"
+                      aria-label="Remove one ${c.name}">−</button>
+              <span id="qty-${c.id}" class="qty-num">0</span>
+              <button class="qty-btn plus" data-act="plus" data-id="${c.id}"
+                      aria-label="Add one ${c.name}">+</button>
+            </div>
+            <div id="line-${c.id}" class="line-total">₹0</div>
+          </div>
+        </div>
+      </div>`).join('');
+  }
+
+  $('shopGrid').addEventListener('click', e => {
+    const btn = e.target.closest('button');
+    if (!btn) return;
+    const item = SHOPS.find(c => c.id === btn.dataset.id);
+    if (!item) return;
+    if (btn.dataset.act === 'plus' && spentTotal() + item.price <= BUDGET) cart[item.id]++;
+    if (btn.dataset.act === 'minus' && cart[item.id] > 0) cart[item.id]--;
+    updateTotals();
+  });
+
+  function updateTotals(){
+    const spent = spentTotal();
+    const left = BUDGET - spent;
+    SHOPS.forEach(c => {
+      $('qty-' + c.id).textContent = cart[c.id];
+      $('line-' + c.id).textContent = '₹' + (cart[c.id] * c.price);
+    });
+    $('spent').textContent = '₹' + spent;
+    $('balance').textContent = '₹' + left;
+    $('wallet').textContent = 'Wallet: ₹' + left;
+
+    // No per-shop requirement anymore — just need *something* in the cart.
+    const count = itemCount();
+    $('checkoutBtn').disabled = count === 0;
+
+    if (count === 0){
+      $('shopHint').textContent = 'Pick anything you like. There is no minimum. There is no shame either.';
+    } else {
+      $('shopHint').textContent =
+        count + ' cracker' + (count === 1 ? '' : 's') + ' in your bag · Abhishek is watching with hope.';
+    }
+
+    document.querySelectorAll('[data-act="plus"]').forEach(b => {
+      const item = SHOPS.find(c => c.id === b.dataset.id);
+      b.disabled = left < item.price;
+    });
+  }
+
+  $('checkoutBtn').addEventListener('click', () => {
+    startBurnShow();
+    show('burnView');
+  });
+
+  // ---------- BURN SHOW (one card at a time) ----------
+  function startBurnShow(){
+    queue = SHOPS.filter(c => cart[c.id] > 0).map(c => ({ id: c.id, qty: cart[c.id] }));
+    queueIndex = 0;
+    locked = false;
+    currentItem = null;
+
+    $('burnList').innerHTML = queue.map(q => {
+      const c = SHOPS.find(x => x.id === q.id);
+      return `
+        <div class="rail-card" id="rail-${c.id}">
+          <div class="rail-emoji">${c.emoji}</div>
+          <div class="rail-info">
+            <div class="rail-name">${c.name}</div>
+            <div class="rail-meta">× ${q.qty} · ₹${q.qty * c.price}</div>
+          </div>
+          <span class="rail-state">queued</span>
+        </div>`;
+    }).join('');
+
+    updateProgress();
+    showNextCard();
+  }
+
+  function updateProgress(){
+    const done = queueIndex;
+    const total = queue.length || 1;
+    $('burnProgress').style.width = (done / total * 100) + '%';
+    $('burnCount').textContent = done + ' / ' + queue.length;
+  }
+
+  function showNextCard(){
+    if (queueIndex >= queue.length){
+      currentItem = null;
+      $('cardLayer').innerHTML = '';
+      setTimeout(finale, 1100);
+      return;
+    }
+
+    const q = queue[queueIndex];
+    const c = SHOPS.find(x => x.id === q.id);
+    currentItem = c;
+    currentQty = q.qty;
+    locked = false;
+
+    document.querySelectorAll('.rail-card').forEach(el => el.classList.remove('active'));
+    const rail = document.getElementById('rail-' + c.id);
+    if (rail){
+      rail.classList.add('active');
+      rail.querySelector('.rail-state').textContent = 'next up';
+    }
+
+    $('stageHint').style.display = 'none';
+    $('cardLayer').innerHTML = `
+      <div class="cracker-card" id="curCard">
+        <div class="card-flame">🔥</div>
+        <div class="card-emoji">${c.emoji}</div>
+        <div class="card-name">${c.name}</div>
+        <div class="card-qty">× ${q.qty} · ₹${q.qty * c.price}</div>
+        <div class="card-tap">TAP TO LIGHT</div>
+      </div>`;
+  }
+
+  function lightCurrent(){
+    if (locked || !currentItem) return;
+    locked = true;
+
+    const item = currentItem;
+    const qty = currentQty;
+    const card = $('curCard');
+
+    const shots = Math.min(qty, MAX_VISUAL);
+    const gap = (item.id === 'anar' || item.id === 'chakri') ? 1500 : 500;
+
+    for (let i = 0; i < shots; i++){
+      const ratio = 0.12 + (i / Math.max(shots - 1, 1)) * 0.76;
+      setTimeout(() => launch(item.id, ratio), i * gap);
+    }
+
+    if (card) card.classList.add('burning');
+    setTimeout(() => { $('cardLayer').innerHTML = ''; }, 420);
+
+    const rail = document.getElementById('rail-' + item.id);
+    if (rail){
+      rail.classList.remove('active');
+      rail.classList.add('burnt');
+      rail.querySelector('.rail-state').textContent = 'burnt';
+    }
+
+    const total = (shots - 1) * gap + 1700;
+    setTimeout(() => {
+      queueIndex++;
+      locked = false;
+      updateProgress();
+      showNextCard();
+    }, total);
+  }
+
+  $('cardLayer').addEventListener('click', e => { e.stopPropagation(); lightCurrent(); });
+  $('burnStage').addEventListener('click', () => lightCurrent());
+
+  // ---------- FINALE ----------
+  function finale(){
+    const items = SHOPS.filter(c => cart[c.id] > 0);
+
+    $('summaryList').innerHTML = items.map(c => `
+      <li class="list-group-item d-flex justify-content-between">
+        <span>${c.emoji} ${c.name} <span class="opacity-50">×${cart[c.id]}</span></span>
+        <span class="text-warning">₹${cart[c.id] * c.price}</span>
+      </li>`).join('') + `
+      <li class="list-group-item d-flex justify-content-between fw-bold text-warning">
+        <span>TOTAL BURNT</span><span>₹${spentTotal()}</span>
+      </li>
+      <li class="list-group-item d-flex justify-content-between fw-bold text-danger">
+        <span>AMOUNT PAID</span><span>₹0</span>
+      </li>`;
+
+    show('finaleView');
+    drawCertificate();
+
+    // celebration barrage
+    let n = 0;
+    const t = setInterval(() => {
+      launch(['skyshot','rocket'][n % 2], 0.06 + (n / 26) * 0.88);
+      if (++n > 26) clearInterval(t);
+    }, 300);
+  }
+
+  // ---------- CERTIFICATE ----------
+  function rr(g, x, y, w, h, r){
+    g.beginPath();
+    g.moveTo(x + r, y);
+    g.arcTo(x + w, y, x + w, y + h, r);
+    g.arcTo(x + w, y + h, x, y + h, r);
+    g.arcTo(x, y + h, x, y, r);
+    g.arcTo(x, y, x + w, y, r);
+    g.closePath();
+  }
+
+  function wrapText(g, text, x, y, maxW, lh, align){
+    g.textAlign = align || 'left';
+    const words = text.split(' ');
+    let line = '', yy = y;
+    for (const w of words){
+      const test = line ? line + ' ' + w : w;
+      if (g.measureText(test).width > maxW && line){
+        g.fillText(line, x, yy);
+        line = w;
+        yy += lh;
+      } else {
+        line = test;
+      }
+    }
+    if (line) g.fillText(line, x, yy);
+    return yy;
+  }
+
+  function drawCertificate(){
+    const cv = $('certCanvas');
+    const W = 1080, H = 1500;
+    cv.width = W; cv.height = H;
+    const g = cv.getContext('2d');
+
+    // ---- background ----
+    const bg = g.createLinearGradient(0, 0, W, H);
+    bg.addColorStop(0,   '#0a0612');
+    bg.addColorStop(0.45,'#1b0f26');
+    bg.addColorStop(1,   '#0a0612');
+    g.fillStyle = bg;
+    g.fillRect(0, 0, W, H);
+
+    const glow = (x, y, r, col) => {
+      const rg = g.createRadialGradient(x, y, 0, x, y, r);
+      rg.addColorStop(0, col);
+      rg.addColorStop(1, 'rgba(0,0,0,0)');
+      g.fillStyle = rg;
+      g.fillRect(0, 0, W, H);
+    };
+    glow(W * 0.18, H * 0.08, 640, 'rgba(255,140,0,0.17)');
+    glow(W * 0.88, H * 0.92, 720, 'rgba(247,37,133,0.14)');
+
+    // ---- borders ----
+    g.strokeStyle = 'rgba(255,194,51,0.85)';
+    g.lineWidth = 5;
+    rr(g, 40, 40, W - 80, H - 80, 26); g.stroke();
+
+    g.strokeStyle = 'rgba(255,194,51,0.28)';
+    g.lineWidth = 1.5;
+    rr(g, 62, 62, W - 124, H - 124, 20); g.stroke();
+
+    const cx = W / 2;
+    g.textBaseline = 'alphabetic';
+
+    // ---- header ----
+    g.textAlign = 'center';
+    g.fillStyle = '#ffc233';
+    g.font = '600 28px Georgia, serif';
+    g.fillText('✦   ·   🪔   ·   ✦', cx, 150);
+
+    g.font = '900 64px Georgia, "Times New Roman", serif';
+    g.fillStyle = '#ffd166';
+    g.fillText('CERTIFICATE', cx, 240);
+
+    g.font = '700 28px system-ui, sans-serif';
+    g.fillStyle = '#f0d9a8';
+    g.fillText('OF UNPAID DIWALI', cx, 288);
+
+    g.strokeStyle = 'rgba(255,194,51,0.35)';
+    g.lineWidth = 2;
+    g.beginPath(); g.moveTo(210, 330); g.lineTo(870, 330); g.stroke();
+
+    // ---- name ----
+    g.font = '400 24px system-ui, sans-serif';
+    g.fillStyle = '#c9bfae';
+    g.fillText('This is to certify that', cx, 388);
+
+    let nf = 58;
+    g.font = `900 ${nf}px system-ui, sans-serif`;
+    while (g.measureText(userName).width > 820 && nf > 24){
+      nf -= 2;
+      g.font = `900 ${nf}px system-ui, sans-serif`;
+    }
+    g.fillStyle = '#ffffff';
+    g.fillText(userName, cx, 462);
+
+    g.font = '400 24px system-ui, sans-serif';
+    g.fillStyle = '#c9bfae';
+    g.fillText('has burnt crackers worth', cx, 516);
+
+    g.font = '900 64px system-ui, sans-serif';
+    g.fillStyle = '#ffd166';
+    g.fillText('₹' + spentTotal(), cx, 592);
+
+    g.font = 'italic 400 23px Georgia, serif';
+    g.fillStyle = '#c9bfae';
+    g.fillText('and has not paid a single rupee for them.', cx, 642);
+
+    g.strokeStyle = 'rgba(255,194,51,0.22)';
+    g.lineWidth = 1.5;
+    g.beginPath(); g.moveTo(210, 680); g.lineTo(870, 680); g.stroke();
+
+    // ---- bill table ----
+    const items = SHOPS.filter(c => cart[c.id] > 0);
+    let y = 732;
+
+    g.textAlign = 'left';
+    g.font = '900 22px system-ui, sans-serif';
+    g.fillStyle = '#ffc233';
+    g.fillText('THE BILL', 150, y);
+
+    g.textAlign = 'right';
+    g.font = '700 18px system-ui, sans-serif';
+    g.fillStyle = 'rgba(255,194,51,0.55)';
+    g.fillText('OWNER: ABHISHEK', 930, y);
+
+    y += 42;
+    g.font = '500 24px system-ui, sans-serif';
+
+    items.forEach(c => {
+      g.textAlign = 'left';
+      g.fillStyle = '#e8dfd0';
+      g.fillText(c.name + '   ×' + cart[c.id], 150, y);
+
+      g.textAlign = 'right';
+      g.fillStyle = '#ffd166';
+      g.fillText('₹' + (cart[c.id] * c.price), 930, y);
+      y += 40;
+    });
+
+    y += 14;
+    g.setLineDash([9, 9]);
+    g.strokeStyle = 'rgba(255,194,51,0.35)';
+    g.lineWidth = 1.5;
+    g.beginPath(); g.moveTo(150, y); g.lineTo(930, y); g.stroke();
+    g.setLineDash([]);
+
+    y += 46;
+    g.textAlign = 'left';
+    g.font = '900 26px system-ui, sans-serif';
+    g.fillStyle = '#ffffff';
+    g.fillText('TOTAL BURNT', 150, y);
+
+    g.textAlign = 'right';
+    g.font = '900 30px system-ui, sans-serif';
+    g.fillStyle = '#ffd166';
+    g.fillText('₹' + spentTotal(), 930, y);
+
+    y += 42;
+    g.textAlign = 'left';
+    g.font = '800 21px system-ui, sans-serif';
+    g.fillStyle = '#ff6b6b';
+    g.fillText('AMOUNT PAID: ₹0', 150, y);
+
+    y += 36;
+    g.fillStyle = '#7ee787';
+    g.fillText('AMOUNT PENDING: ₹' + spentTotal(), 150, y);
+
+    // ---- PAYMENT PENDING stamp ----
+    drawStamp(g, cx, 1185, 'PAYMENT PENDING', 'OWNER: ABHISHEK');
+
+    // ---- footer ----
+    g.textAlign = 'center';
+    g.font = 'italic 400 22px Georgia, serif';
+    g.fillStyle = '#c9bfae';
+    g.fillText('Valid everywhere except Abhishek’s bank account.', cx, 1320);
+
+    g.font = '700 19px system-ui, sans-serif';
+    g.fillStyle = '#ffd166';
+    const lastY = wrapText(
+      g,
+      'Can’t pay? Fine. But share this on WhatsApp from where you got the link — make Abhishek happy. Or pay. Either works.',
+      cx, 1358, 780, 26, 'center'
+    );
+
+    g.font = '500 16px system-ui, sans-serif';
+    g.fillStyle = 'rgba(200,190,175,0.55)';
+    g.fillText(
+      'Issued ' + new Date().toLocaleDateString('en-IN', { day:'numeric', month:'long', year:'numeric' }),
+      cx, Math.min(lastY + 42, 1428)
+    );
+  }
+
+  function drawStamp(g, cx, cy, text, sub){
+    g.save();
+    g.translate(cx, cy);
+    g.rotate(-0.14);
+
+    const w = 600, h = 168;
+
+    g.strokeStyle = 'rgba(230,57,70,0.92)';
+    g.lineWidth = 9;
+    rr(g, -w/2, -h/2, w, h, 18); g.stroke();
+
+    g.lineWidth = 3.5;
+    rr(g, -w/2 + 15, -h/2 + 15, w - 30, h - 30, 10); g.stroke();
+
+    g.fillStyle = 'rgba(230,57,70,0.95)';
+    g.textAlign = 'center';
+    g.textBaseline = 'middle';
+
+    g.font = '900 74px system-ui, "Segoe UI", sans-serif';
+    g.fillText(text, 0, -14);
+
+    g.font = '800 24px system-ui, sans-serif';
+    g.fillText(sub, 0, 52);
+
+    g.restore();
+    g.textBaseline = 'alphabetic';
+  }
+
+  // ---------- DOWNLOAD / SHARE ----------
+  $('downloadBtn').addEventListener('click', () => {
+    const cv = $('certCanvas');
+    cv.toBlob(blob => {
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'Diwali-Bill-' + (userName || 'guest').replace(/\s+/g, '-') + '.png';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 4000);
+    }, 'image/png');
+  });
+
+  $('waBtn').addEventListener('click', () => {
+    const items = SHOPS.filter(c => cart[c.id] > 0);
+    const list = items.map(c => c.name + ' ×' + cart[c.id]).join(', ');
+
+    const msg =
+      '🪔 *DIWALI BILL NOTICE* 🪔\n\n' +
+      'I just burnt *₹' + spentTotal() + '* worth of crackers at ' +
+      '*Abhishek\'s Diwali Cracker Bazaar* 🎆\n\n' +
+      'Items: ' + list + '\n\n' +
+      'Amount paid: *₹0*\n' +
+      'Amount pending: *₹' + spentTotal() + '*\n\n' +
+      'Abhishek is a good man. He waited all evening with a receipt book and a smile, ' +
+      'and I have no plans of paying him. 😌\n\n' +
+      'The certificate is attached below. If I don\'t pay, at least make him happy — ' +
+      'share this and let the whole group know. 🪔🔥';
+
+    window.open('https://wa.me/?text=' + encodeURIComponent(msg), '_blank');
+  });
+
+  $('againBtn').addEventListener('click', () => {
+    cart = {};
+    queue = []; queueIndex = 0; currentItem = null; locked = false;
+    $('cardLayer').innerHTML = '';
+    $('nameInput').value = '';
+    $('wallet').classList.add('d-none');
+    $('stageHint').style.display = '';
+    show('loginView');
+  });
+
+  // ---------- FIREWORKS ENGINE (canvas) ----------
+  const canvas = $('fx');
+  const ctx = canvas.getContext('2d');
+  let W, H, particles = [];
+
+  function resize(){
+    W = canvas.width  = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  // Fireworks appear inside the burn stage when it is visible.
+  function skyBounds(){
+    const stage = $('burnStage');
+    const burnVisible = !$('burnView').classList.contains('d-none');
+    if (stage && burnVisible){
+      const r = stage.getBoundingClientRect();
+      if (r.width > 0 && r.height > 0){
+        return { x: r.left, y: r.top, w: r.width, h: r.height };
+      }
+    }
+    return { x: 0, y: 0, w: W, h: H };
+  }
+
+  const PALETTES = [
+    ['#ff3b3b', '#ff9f1c', '#ffe066'],
+    ['#4cc9f0', '#4895ef', '#ffffff'],
+    ['#80ed99', '#38b000', '#ffff99'],
+    ['#f72585', '#b5179e', '#ffd6ff'],
+    ['#ffd700', '#ffb703', '#ffffff']
+  ];
+  const rand = (a, b) => a + Math.random() * (b - a);
+  const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
+
+  function spawn(x, y, vx, vy, color, life, size, gravity){
+    particles.push({ x, y, vx, vy, color, life, max: life, size, g: gravity });
+  }
+
+  function burst(x, y, count, speed, palette, size = 2.5){
+    for (let i = 0; i < count; i++){
+      const a = rand(0, Math.PI * 2);
+      const s = rand(0.3, 1) * speed;
+      spawn(x, y, Math.cos(a) * s, Math.sin(a) * s, pick(palette), rand(50, 90), size, 0.05);
+    }
+  }
+
+  function launch(type, xRatio){
+    const b = skyBounds();
+    const palette = pick(PALETTES);
+    const x = b.x + b.w * (xRatio != null ? xRatio : rand(0.15, 0.85));
+
+    if (type === 'sparkler'){
+      const y = b.y + b.h * rand(0.45, 0.78);
+      let t = 0;
+      const iv = setInterval(() => {
+        for (let i = 0; i < 8; i++){
+          const a = rand(0, Math.PI * 2), s = rand(1, 4);
+          spawn(x, y, Math.cos(a) * s, Math.sin(a) * s - 1, '#ffd166', rand(15, 35), 1.5, 0.08);
+        }
+        if (++t > 50) clearInterval(iv);
+      }, 30);
+    }
+
+    if (type === 'anar'){
+      const y = b.y + b.h * 0.86;
+      let t = 0;
+      const iv = setInterval(() => {
+        for (let i = 0; i < 10; i++){
+          spawn(x + rand(-6, 6), y, rand(-1.6, 1.6), rand(-9, -5),
+                pick(palette), rand(40, 70), 2, 0.12);
+        }
+        if (++t > 70) clearInterval(iv);
+      }, 25);
+    }
+
+    if (type === 'chakri'){
+      const y = b.y + b.h * 0.78;
+      let t = 0, angle = 0;
+      const iv = setInterval(() => {
+        angle += 0.5;
+        for (let k = 0; k < 3; k++){
+          const a = angle + k * 2.09;
+          spawn(x, y, Math.cos(a) * 4, Math.sin(a) * 4, pick(palette), rand(30, 50), 2, 0.02);
+        }
+        if (++t > 90) clearInterval(iv);
+      }, 20);
+    }
+
+    if (type === 'rocket' || type === 'skyshot'){
+      const big = type === 'skyshot';
+      const targetY = b.y + b.h * rand(0.12, 0.38);
+      let y = b.y + b.h;
+      let vy = -rand(11, 14);
+      const iv = setInterval(() => {
+        y += vy;
+        vy *= 0.975;
+        spawn(x + rand(-1, 1), y, rand(-0.3, 0.3), rand(0.5, 1.5), '#ffd166', 18, 2, 0);
+        if (y <= targetY || Math.abs(vy) < 2.5){
+          clearInterval(iv);
+          burst(x, y, big ? 220 : 110, big ? 7.5 : 5.5, palette, big ? 3 : 2.5);
+          if (big){
+            setTimeout(() => burst(x, y, 120, 4, ['#ffffff', pick(palette)], 2), 300);
+            setTimeout(() => burst(x + rand(-60, 60), y + rand(-40, 40), 90, 3.5, pick(PALETTES), 2), 600);
+          }
+        }
+      }, 16);
+    }
+  }
+
+  function frame(){
+    ctx.globalCompositeOperation = 'destination-out';
+    ctx.fillStyle = 'rgba(0,0,0,0.22)';
+    ctx.fillRect(0, 0, W, H);
+    ctx.globalCompositeOperation = 'lighter';
+
+    particles = particles.filter(p => p.life > 0);
+    for (const p of particles){
+      p.x += p.vx; p.y += p.vy;
+      p.vy += p.g; p.vx *= 0.99;
+      p.life--;
+      ctx.globalAlpha = Math.max(p.life / p.max, 0);
+      ctx.fillStyle = p.color;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+    requestAnimationFrame(frame);
+  }
+  frame();
+</script>
+</body>
+</html>
